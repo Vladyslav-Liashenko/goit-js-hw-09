@@ -16,9 +16,12 @@ const options = {
   minDate: "today",
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
-
     if (selectedDate <= new Date()) {
-      window.alert("Please choose a date in the future");
+      Notiflix.Report.failure(
+        "Error",
+        "Please choose a date in the future",
+        "Close"
+      );
       datetime.value = "";
       startButton.disabled = true;
     } else {
@@ -28,15 +31,15 @@ const options = {
 };
 
 const datePicker = flatpickr("#datetime-picker", options);
-
 startButton.addEventListener("click", () => {
-  const nowTime = new Date();
-    const nowTimeM = nowTime.getTime();
+    
     let milliseconds = new Date(datetime.value);
     milliseconds = milliseconds.getTime();
 
 
   countdownInterval = setInterval(() => {
+    const nowTime = new Date();
+    const nowTimeM = nowTime.getTime();
     function convertMs(ms) {
       // Number of milliseconds per unit of time
       const second = 1000;
@@ -52,16 +55,17 @@ startButton.addEventListener("click", () => {
       const minutes = Math.floor(((ms % day) % hour) / minute);
       // Remaining seconds
       const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
       return { days, hours, minutes, seconds };
     }
-
     const time = convertMs(milliseconds - nowTimeM);
 
-    beforeDays.innerHTML = time.days;
-    beforeHour.innerHTML = time.hours;
-    beforeMinute.innerHTML = time.minutes;
-    beforeSecond.innerHTML = time.seconds;
+    beforeDays.textContent = modifyDate(time.days, 2);
+    beforeHour.innerHTML = modifyDate(time.hours, 2);
+    beforeMinute.innerHTML = modifyDate(time.minutes, 2);
+    beforeSecond.textContent = modifyDate(time.seconds, 2);
   }, 1000);
-    startButton.disabled = true;
 });
+
+function modifyDate(num, totalLength) {
+  return String(num).padStart(totalLength, "0");
+}
