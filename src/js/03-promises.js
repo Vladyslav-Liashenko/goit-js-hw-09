@@ -30,19 +30,18 @@ submitBtn.addEventListener("click", (e) => {
     promises.push(createSinglePromise(i, delay + (i - 1) * step));
   }
 
-  Promise.all(promises)
-    .then((results) => {
-      results.forEach(({ position, delay }) => {
-        Notiflix.Notify.Success(
+  Promise.all(promises.map((p) => p.catch((e) => e))).then((results) => {
+    results.forEach(({ position, delay }) => {
+      if (delay instanceof Error) {
+        Notiflix.Notify.failure(
+          `❌ Rejected promise ${position} in ${delay.position}ms`
+        );
+      } else {
+        Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`
         );
-      });
-    })
-    .catch((results) => {
-      results.forEach(({ position, delay }) => {
-        Notiflix.Notify.Failure(
-          `❌ Rejected promise ${position} in ${delay}ms`
-        );
-      });
+      }
     });
+  });
 });
+
