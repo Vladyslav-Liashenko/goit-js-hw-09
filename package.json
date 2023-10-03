@@ -1,5 +1,5 @@
 {
-  "name": "parcel-project-template",
+  "name": "parcel-project-hw09",
   "version": "2.0.0",
   "description": "",
   "homepage": "https://Vladyslav-Liashenko.github.io/goit-js-hw-09",
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goitacademy/parcel-project-template.git"
+    "url": "git+https://github.com/goitacademy/parcel-project-hw09.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goitacademy/parcel-project-template/issues"
+    "url": "https://github.com/goitacademy/parcel-project-hw09/issues"
   },
   "dependencies": {
     "@vimeo/player": "^2.20.1",
