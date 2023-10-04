@@ -20,6 +20,3 @@ stop.addEventListener("click", () => {
     clearInterval(interval);
     start.disabled = !disabled;
 });
-
-
-
